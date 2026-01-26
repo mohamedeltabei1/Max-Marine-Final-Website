@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Max Marine Red/Crimson Brand Palette */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    /* Crimson Red Primary - from logo */
+    --primary: 355 75% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Deep Navy Secondary */
+    --secondary: 215 50% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Neutral Muted */
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Red Accent */
+    --accent: 355 80% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 355 75% 45%;
+
+    --radius: 0.5rem;
+
+    /* Custom Brand Tokens */
+    --crimson: 355 75% 45%;
+    --crimson-light: 355 70% 55%;
+    --crimson-dark: 355 80% 35%;
+    --navy-deep: 215 50% 12%;
+    --navy-medium: 215 45% 20%;
+    --navy-light: 215 40% 30%;
+    --silver: 220 10% 75%;
+    --slate-warm: 220 15% 55%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 50% 12%) 0%, hsl(215 45% 20%) 50%, hsl(215 40% 28%) 100%);
+    --gradient-red: linear-gradient(135deg, hsl(355 75% 45%) 0%, hsl(355 80% 35%) 100%);
+    --gradient-navy: linear-gradient(180deg, hsl(215 50% 12%) 0%, hsl(215 45% 18%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsla(215 50% 12% / 0.85) 0%, hsla(215 50% 12% / 0.95) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px hsla(220 20% 15% / 0.05);
+    --shadow-md: 0 4px 12px hsla(220 20% 15% / 0.08);
+    --shadow-lg: 0 12px 32px hsla(220 20% 15% / 0.12);
+    --shadow-xl: 0 24px 64px hsla(220 20% 15% / 0.16);
+    --shadow-red: 0 8px 24px hsla(355 75% 45% / 0.3);
+
+    /* Sidebar */
+    --sidebar-background: 215 50% 12%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 355 75% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 45% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 40% 25%;
+    --sidebar-ring: 355 75% 45%;
+
+    --chart-1: 355 75% 45%;
+    --chart-2: 215 50% 40%;
+    --chart-3: 185 40% 50%;
+    --chart-4: 45 80% 55%;
+    --chart-5: 280 40% 50%;
+  }
+
+  .dark {
+    --background: 215 50% 8%;
+    --foreground: 220 10% 95%;
+
+    --card: 215 45% 12%;
+    --card-foreground: 220 10% 95%;
+
+    --popover: 215 45% 12%;
+    --popover-foreground: 220 10% 95%;
+
+    --primary: 355 70% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 40% 25%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 40% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 355 75% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 35% 22%;
+    --input: 215 35% 22%;
+    --ring: 355 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .maritime-heading {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+
+  .maritime-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-red {
+    background: var(--gradient-red);
+  }
+
+  .gradient-navy {
+    background: var(--gradient-navy);
+  }
+
+  .gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  .shadow-maritime {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-red {
+    box-shadow: var(--shadow-red);
+  }
+
+  .text-gradient-red {
+    background: var(--gradient-red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-maritime {
+    @apply bg-card rounded-lg border border-border;
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-maritime:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all duration-300;
+    background: var(--gradient-red);
+    color: white;
+    box-shadow: var(--shadow-red);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px hsla(355, 75%, 45%, 0.4);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-maritime {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Animated counter */
+  .stat-number {
+    @apply font-bold tabular-nums;
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+
+  /* Client logo slider */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .logo-slider {
+    animation: scroll 30s linear infinite;
+  }
+
+  .logo-slider:hover {
+    animation-play-state: paused;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
