@@ -1,21 +1,7 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Twitter } from "lucide-react";
 import logo from "@/assets/logo.png";
-
-const offices = [
-  {
-    name: "Alexandria (HQ)",
-    address: "14 Admon Fermon St., Navy Building, 1st Floor, Smouha",
-    phone: "+20 3 123 4567",
-    email: "alex@maxmarinegroup.com",
-  },
-  {
-    name: "Abu Qir",
-    address: "3 Mohamed Abdou St., 1st Floor",
-    phone: "+20 3 234 5678",
-    email: "abuqir@maxmarinegroup.com",
-  },
-];
+import { offices, mainContact, socialMedia } from "@/data/contact";
 
 const companies = [
   { name: "Max Marine S.A.E.", href: "/companies/max-marine" },
@@ -36,13 +22,17 @@ const services = [
 
 const quickLinks = [
   { name: "About the Group", href: "/group" },
-  { name: "Industries", href: "/industries" },
   { name: "Fleet & Assets", href: "/fleet" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "QHSE & Compliance", href: "/qhse-compliance" },
   { name: "Careers", href: "/careers" },
-  { name: "News", href: "/news" },
+  { name: "Contact Us", href: "/contact" },
 ];
+
+// Display only HQ and Abu Qir in footer for brevity
+const footerOffices = offices.filter(o => 
+  o.id === "alexandria-hq" || o.id === "abu-qir"
+);
 
 export function Footer() {
   return (
@@ -56,13 +46,13 @@ export function Footer() {
               <span className="font-semibold text-primary-foreground">Operations Support Available 24/7</span>
             </div>
             <div className="flex items-center gap-4">
-              <a href="tel:+201234567890" className="flex items-center gap-2 text-primary-foreground hover:underline font-medium">
+              <a href={`tel:${mainContact.emergencyPhone}`} className="flex items-center gap-2 text-primary-foreground hover:underline font-medium">
                 <Phone className="h-4 w-4" />
-                +20 123 456 7890
+                {mainContact.emergencyPhone}
               </a>
-              <a href="mailto:operations@maxmarinegroup.com" className="flex items-center gap-2 text-primary-foreground hover:underline font-medium">
+              <a href={`mailto:${mainContact.email}`} className="flex items-center gap-2 text-primary-foreground hover:underline font-medium">
                 <Mail className="h-4 w-4" />
-                operations@maxmarinegroup.com
+                {mainContact.email}
               </a>
             </div>
           </div>
@@ -90,7 +80,7 @@ export function Footer() {
             
             {/* Office Quick Cards */}
             <div className="space-y-3">
-              {offices.map((office) => (
+              {footerOffices.map((office) => (
                 <div key={office.name} className="p-3 rounded-lg bg-navy-medium/50 border border-navy-light/30">
                   <div className="font-medium text-sm mb-1">{office.name}</div>
                   <div className="text-xs text-secondary-foreground/70 mb-2">{office.address}</div>
@@ -170,13 +160,31 @@ export function Footer() {
               </Link>
             </div>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+              <a 
+                href={socialMedia.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Max Marine Group on LinkedIn"
+                className="text-secondary-foreground/60 hover:text-primary transition-colors"
+              >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+              <a 
+                href={socialMedia.facebook} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Max Marine Group on Facebook"
+                className="text-secondary-foreground/60 hover:text-primary transition-colors"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a 
+                href={socialMedia.instagram} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Max Marine Group on Instagram"
+                className="text-secondary-foreground/60 hover:text-primary transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
             </div>

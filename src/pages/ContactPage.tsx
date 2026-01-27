@@ -8,62 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-
-const offices = [
-  {
-    name: "Alexandria (Headquarters)",
-    address: "14 Admon Fermon St., Navy Building, 1st Floor, Smouha, Alexandria",
-    phone: "+20 3 123 4567",
-    email: "alex@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 8:00 AM - 5:00 PM",
-  },
-  {
-    name: "Abu Qir",
-    address: "3 Mohamed Abdou St., 1st Floor, Abu Qir",
-    phone: "+20 3 234 5678",
-    email: "abuqir@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 8:00 AM - 5:00 PM",
-  },
-  {
-    name: "Cairo",
-    address: "21B Nerko, Degla New Maadi, Cairo",
-    phone: "+20 2 345 6789",
-    email: "cairo@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 9:00 AM - 6:00 PM",
-  },
-  {
-    name: "Port Said",
-    address: "El Nahda St., Free Port Building, Port Said",
-    phone: "+20 66 123 4567",
-    email: "portsaid@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 8:00 AM - 5:00 PM",
-  },
-  {
-    name: "Damietta",
-    address: "Investment Building, Damietta Port",
-    phone: "+20 57 123 4567",
-    email: "damietta@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 8:00 AM - 5:00 PM",
-  },
-  {
-    name: "Free Zone",
-    address: "El-Amreya Free Zone, Alexandria",
-    phone: "+20 3 345 6789",
-    email: "freezone@maxmarinegroup.com",
-    hours: "Sunday - Thursday: 8:00 AM - 5:00 PM",
-  },
-];
-
-const inquiryTypes = [
-  "Port Call / Vessel Arrival",
-  "Suez Transit",
-  "Cargo / Freight Services",
-  "Husbandry Services",
-  "Yard Inquiry",
-  "Equipment Rental",
-  "General Inquiry",
-  "Careers",
-];
+import { offices, inquiryTypes } from "@/data/contact";
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -73,7 +18,8 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // TODO: Replace with real form submission
+    // Example: await fetch('/api/contact', { method: 'POST', body: new FormData(e.target) })
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     toast({

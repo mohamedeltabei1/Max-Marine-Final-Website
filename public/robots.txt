@@ -1,3 +1,15 @@
+# Max Marine Group - robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://maxmarinegroup.com/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Specific bots
 User-agent: Googlebot
 Allow: /
 
@@ -8,6 +20,7 @@ User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
+Allow: /
 Allow: /
 
 User-agent: *
