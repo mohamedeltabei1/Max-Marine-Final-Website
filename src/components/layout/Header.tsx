@@ -91,6 +91,14 @@ export function Header() {
 
   return (
     <>
+      {/* Skip to Content Link for Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:font-medium"
+      >
+        Skip to content
+      </a>
+
       {/* Top Bar */}
       <div className="bg-secondary text-secondary-foreground">
         <div className="container-maritime flex items-center justify-between py-2 text-sm">
@@ -212,8 +220,10 @@ export function Header() {
                 </Button>
               </Link>
               <button
-                className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
+                className="lg:hidden p-3 rounded-md hover:bg-muted transition-colors active:bg-muted/70 touch-manipulation"
                 onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={mobileMenuOpen}
               >
                 <Menu className="h-6 w-6" />
               </button>
@@ -241,7 +251,11 @@ export function Header() {
             >
               <div className="flex items-center justify-between p-4 border-b border-border">
                 <img src={logo} alt="Max Marine" className="h-12" />
-                <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-md hover:bg-muted">
+                <button 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className="p-3 rounded-md hover:bg-muted active:bg-muted/70 touch-manipulation"
+                  aria-label="Close menu"
+                >
                   <X className="h-5 w-5" />
                 </button>
               </div>
@@ -250,7 +264,7 @@ export function Header() {
                   <div key={item.name}>
                     <Link
                       to={item.href}
-                      className="block py-3 px-4 rounded-md hover:bg-muted transition-colors font-medium"
+                      className="block py-3 px-4 rounded-md hover:bg-muted active:bg-muted/70 transition-colors font-medium touch-manipulation min-h-[44px] flex items-center"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
@@ -261,7 +275,7 @@ export function Header() {
                           <Link
                             key={child.name}
                             to={child.href}
-                            className="block py-2 px-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="block py-3 px-4 text-sm text-muted-foreground hover:text-foreground active:text-foreground transition-colors touch-manipulation min-h-[44px] flex items-center"
                             onClick={() => setMobileMenuOpen(false)}
                           >
                             {child.name}

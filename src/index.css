@@ -268,4 +268,63 @@
       transform: scale(1);
     }
   }
+
+  /* Mobile Optimizations */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve text readability on mobile */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px; /* Prevent zoom on iOS input focus */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    /* Ensure minimum touch target size */
+    button, a, input, select, textarea {
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+
+    /* Better spacing for mobile */
+    .section-padding {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    /* Responsive images */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .container-maritime {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Prevent text selection on interactive elements */
+  button, .btn-primary, .btn-secondary {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
 }
+
