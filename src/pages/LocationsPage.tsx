@@ -125,11 +125,11 @@ const LocationsPage = () => {
                     <Ship className="h-5 w-5 text-secondary" />
                     Port at a Glance
                   </h3>
-                  <dl className="space-y-3">
+                  <dl className="divide-y divide-border">
                     {location.facts.map((fact) => (
-                      <div key={fact.label}>
+                      <div key={fact.label} className="py-2.5 first:pt-0 last:pb-0">
                         <dt className="text-xs uppercase tracking-wide text-muted-foreground">{fact.label}</dt>
-                        <dd className="text-sm text-foreground font-medium">{fact.value}</dd>
+                        <dd className="text-sm text-foreground font-medium mt-0.5">{fact.value}</dd>
                       </div>
                     ))}
                   </dl>

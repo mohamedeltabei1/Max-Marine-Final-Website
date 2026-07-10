@@ -15,6 +15,12 @@ const clients = [
   { name: "Eni", logo: "🔶" },
   { name: "Edison", logo: "💡" },
   { name: "Transocean", logo: "🌐" },
+  { name: "Subsea 7", logo: "🔱" },
+  { name: "Fugro", logo: "📡" },
+  { name: "Saipem", logo: "🏗️" },
+  { name: "Technip", logo: "⚙️" },
+  { name: "Bourbon", logo: "🚤" },
+  { name: "Diamond Offshore", logo: "💎" },
 ];
 
 const testimonials = [
