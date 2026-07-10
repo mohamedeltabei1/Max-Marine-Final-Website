@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/seo/Seo";
 import { breadcrumbSchema, portServiceSchema } from "@/lib/structured-data";
-import { MapPin, ArrowRight, Anchor, Phone, Mail, Clock, Navigation } from "lucide-react";
+import { MapPin, ArrowRight, Anchor, Phone, Mail, Clock, Navigation, Ship } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { locations, getLocationById } from "@/data/locations";
 import { getServiceById } from "@/data/services";
@@ -108,11 +108,35 @@ const LocationsPage = () => {
                     <ArrowRight className="h-4 w-4 ml-1" />
                   </Link>
                 </div>
+
+                <div className="mt-12 pt-8 border-t border-border">
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+                    About {location.displayName}
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed">{location.about}</p>
+                </div>
               </div>
 
-              {/* Sidebar: office / contact */}
-              <div>
-                <div className="card-maritime p-6 sticky top-24">
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Port at a glance */}
+                <div className="card-maritime p-6">
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+                    <Ship className="h-5 w-5 text-secondary" />
+                    Port at a Glance
+                  </h3>
+                  <dl className="space-y-3">
+                    {location.facts.map((fact) => (
+                      <div key={fact.label}>
+                        <dt className="text-xs uppercase tracking-wide text-muted-foreground">{fact.label}</dt>
+                        <dd className="text-sm text-foreground font-medium">{fact.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                {/* Office / contact */}
+                <div className="card-maritime p-6">
                   {office ? (
                     <>
                       <h3 className="font-display text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
