@@ -1,27 +1,7 @@
 # Max Marine Group - robots.txt
+# Allow all crawlers full access.
 
 User-agent: *
 Allow: /
 
-# Sitemaps
 Sitemap: https://maxmarinegroup.com/sitemap.xml
-
-# Crawl-delay for politeness
-Crawl-delay: 1
-
-# Specific bots
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-Allow: /
-
-User-agent: *
-Allow: /

@@ -19,6 +19,8 @@ import {
 import { getServiceById, services } from "@/data/services";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Seo } from "@/components/seo/Seo";
+import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 export function ServiceDetailPage() {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -40,6 +42,7 @@ export function ServiceDetailPage() {
   if (!service) {
     return (
       <Layout>
+        <Seo title="Service Not Found" path="/services" noindex />
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Service Not Found</h1>
@@ -79,6 +82,24 @@ export function ServiceDetailPage() {
 
   return (
     <Layout>
+      <Seo
+        title={`${service.name} in Egypt`}
+        description={service.description}
+        path={`/services/${service.id}`}
+        schema={[
+          serviceSchema({
+            name: service.name,
+            description: service.description,
+            path: `/services/${service.id}`,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.name, path: `/services/${service.id}` },
+          ]),
+          ...(service.faq?.length ? [faqSchema(service.faq)] : []),
+        ]}
+      />
       {/* Hero */}
       <section className="gradient-navy py-16 md:py-24">
         <div className="container-maritime">

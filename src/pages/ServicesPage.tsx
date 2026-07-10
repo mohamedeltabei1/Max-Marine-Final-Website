@@ -5,6 +5,8 @@ import { Anchor, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 import { ServiceDetailPage } from "@/components/service/ServiceDetailPage";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 const ServicesPage = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -17,6 +19,15 @@ const ServicesPage = () => {
   // Otherwise show the services listing
   return (
     <Layout>
+      <Seo
+        title="Marine & Offshore Services in Egypt"
+        description="Full marine services portfolio across Egypt: ship agency, Suez Canal transit, port husbandry, bunkering, ship chandlery, customs clearance, offshore logistics, waste management and more — at every major Egyptian port."
+        path="/services"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

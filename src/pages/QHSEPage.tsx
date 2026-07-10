@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 import { Shield, Award, FileCheck, Users, Download, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -22,6 +24,15 @@ const certifications = [
 const QHSEPage = () => {
   return (
     <Layout>
+      <Seo
+        title="QHSE & Compliance — Quality, Health, Safety & Environment"
+        description="Max Marine Group's QHSE commitment: ISO 9001, ISO 14001 and ISO 45001 management systems, ISPS Code compliance, safety training and environmental standards across all Egyptian operations."
+        path="/qhse-compliance"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "QHSE & Compliance", path: "/qhse-compliance" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

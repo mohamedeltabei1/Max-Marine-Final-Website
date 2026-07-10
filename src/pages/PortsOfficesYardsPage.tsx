@@ -7,6 +7,8 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 const offices = [
   {
@@ -134,6 +136,7 @@ const PortsOfficesYardsPage = () => {
     if (!yard) {
       return (
         <Layout>
+          <Seo title="Location Not Found" path="/ports-offices-yards" noindex />
           <div className="min-h-[60vh] flex items-center justify-center">
             <div className="text-center">
               <h1 className="text-2xl font-bold mb-4">Yard Not Found</h1>
@@ -149,6 +152,16 @@ const PortsOfficesYardsPage = () => {
 
     return (
       <Layout>
+        <Seo
+          title={`${yard.name} — ${yard.location}`}
+          description={yard.description}
+          path={`/ports-offices-yards/${yard.id}`}
+          schema={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Ports, Offices & Yards", path: "/ports-offices-yards" },
+            { name: yard.name, path: `/ports-offices-yards/${yard.id}` },
+          ])}
+        />
         {/* Yard Detail Hero */}
         <section className="gradient-navy py-16 md:py-24">
           <div className="container-maritime">
@@ -322,6 +335,15 @@ const PortsOfficesYardsPage = () => {
   // Main hub page
   return (
     <Layout>
+      <Seo
+        title="Ports, Offices & Yards Across Egypt"
+        description="Max Marine Group's Egypt-wide network: offices and port operations in Alexandria, Abu Qir, Port Said, Damietta, Suez and Cairo, plus dedicated yard and free-zone facilities."
+        path="/ports-offices-yards"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Ports, Offices & Yards", path: "/ports-offices-yards" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

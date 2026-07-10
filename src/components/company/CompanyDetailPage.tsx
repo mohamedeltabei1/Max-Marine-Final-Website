@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { getCompanyById, companies } from "@/data/companies";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export function CompanyDetailPage() {
   const { companyId } = useParams<{ companyId: string }>();
@@ -32,6 +34,7 @@ export function CompanyDetailPage() {
   if (!company) {
     return (
       <Layout>
+        <Seo title="Company Not Found" path="/companies" noindex />
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Company Not Found</h1>
@@ -69,6 +72,16 @@ export function CompanyDetailPage() {
 
   return (
     <Layout>
+      <Seo
+        title={`${company.shortName} — ${company.subtitle}`}
+        description={company.description}
+        path={`/companies/${company.id}`}
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Companies", path: "/companies" },
+          { name: company.shortName, path: `/companies/${company.id}` },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-16 md:py-24">
         <div className="container-maritime">

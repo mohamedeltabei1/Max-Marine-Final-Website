@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 import { Ship, Anchor, Container, Wrench, ArrowRight, ImageIcon, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -59,6 +61,15 @@ const assetCategories = [
 const FleetPage = () => {
   return (
     <Layout>
+      <Seo
+        title="Fleet, Assets & Offshore Equipment"
+        description="Max Marine Group's operational assets across Egypt — support vessels, DNV-certified offshore containers and cargo baskets, lifting equipment and specialised rental tools for marine and offshore projects."
+        path="/fleet"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Fleet & Assets", path: "/fleet" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

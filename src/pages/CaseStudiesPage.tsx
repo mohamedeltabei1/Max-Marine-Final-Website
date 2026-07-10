@@ -8,6 +8,8 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useState } from "react";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 interface CaseStudy {
   id: string;
@@ -109,6 +111,7 @@ const CaseStudiesPage = () => {
     if (!caseStudy) {
       return (
         <Layout>
+          <Seo title="Case Study Not Found" path="/case-studies" noindex />
           <div className="min-h-[60vh] flex items-center justify-center">
             <div className="text-center">
               <h1 className="text-2xl font-bold mb-4">Case Study Not Found</h1>
@@ -124,6 +127,17 @@ const CaseStudiesPage = () => {
 
     return (
       <Layout>
+        <Seo
+          title={caseStudy.title}
+          description={caseStudy.challenge}
+          path={`/case-studies/${caseStudy.id}`}
+          type="article"
+          schema={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Case Studies", path: "/case-studies" },
+            { name: caseStudy.title, path: `/case-studies/${caseStudy.id}` },
+          ])}
+        />
         {/* Case Study Detail Hero */}
         <section className="gradient-navy py-16 md:py-24">
           <div className="container-maritime">
@@ -309,6 +323,15 @@ const CaseStudiesPage = () => {
   // Main listing page
   return (
     <Layout>
+      <Seo
+        title="Case Studies & Project Track Record"
+        description="Real project examples from Max Marine Group across shipping, offshore support and logistics — vessel operations, crew rotations and project cargo handling at Egyptian ports."
+        path="/case-studies"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Case Studies", path: "/case-studies" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

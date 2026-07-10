@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 import { Anchor, Calendar, Building2, MapPin, Ship, Award, Users, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -26,6 +28,15 @@ const values = [
 const GroupPage = () => {
   return (
     <Layout>
+      <Seo
+        title="About the Group — Egyptian Maritime Companies Since 1972"
+        description="Max Marine Group brings together five specialised maritime companies operating across Egypt since 1972 — ship agency, offshore support, free-zone and petroleum services from Alexandria to the Suez Canal."
+        path="/group"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "The Group", path: "/group" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

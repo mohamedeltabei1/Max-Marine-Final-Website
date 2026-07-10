@@ -5,6 +5,8 @@ import { Building2, ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { companies } from "@/data/companies";
 import { CompanyDetailPage } from "@/components/company/CompanyDetailPage";
+import { Seo } from "@/components/seo/Seo";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 const CompaniesPage = () => {
   const { companyId } = useParams<{ companyId: string }>();
@@ -17,6 +19,15 @@ const CompaniesPage = () => {
   // Otherwise show the companies listing
   return (
     <Layout>
+      <Seo
+        title="Our Companies — Divisions of Max Marine Group"
+        description="Explore the five companies of Max Marine Group: Max Marine S.A.E. shipping agency, Max Gulf, Max Marine Free Zone, Heat Oil and Era Tours — specialised maritime, petroleum and logistics divisions across Egypt."
+        path="/companies"
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Companies", path: "/companies" },
+        ])}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">

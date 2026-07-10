@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
 import { motion } from "framer-motion";
 import { Cookie, Mail, Settings } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +9,11 @@ import { Link } from "react-router-dom";
 const CookiePolicyPage = () => {
   return (
     <Layout>
+      <Seo
+        title="Cookie Policy"
+        description="How Max Marine Group uses cookies and similar technologies on this website."
+        path="/cookies"
+      />
       {/* Hero */}
       <section className="gradient-navy py-16 md:py-24">
         <div className="container-maritime">

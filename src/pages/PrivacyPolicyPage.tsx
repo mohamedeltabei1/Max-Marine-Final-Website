@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
 import { motion } from "framer-motion";
 import { Shield, FileText, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const PrivacyPolicyPage = () => {
   return (
     <Layout>
+      <Seo
+        title="Privacy Policy"
+        description="How Max Marine Group collects, uses and protects your personal information."
+        path="/privacy"
+      />
       {/* Hero */}
       <section className="gradient-navy py-16 md:py-24">
         <div className="container-maritime">

@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { Seo } from "@/components/seo/Seo";
 import { motion } from "framer-motion";
 import { FileText, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const TermsPage = () => {
   return (
     <Layout>
+      <Seo
+        title="Terms & Conditions"
+        description="The terms and conditions governing the use of the Max Marine Group website and services."
+        path="/terms"
+      />
       {/* Hero */}
       <section className="gradient-navy py-16 md:py-24">
         <div className="container-maritime">

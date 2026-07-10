@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { offices, inquiryTypes } from "@/data/contact";
+import { Seo } from "@/components/seo/Seo";
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -33,6 +35,18 @@ const ContactPage = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Contact Us — 24/7 Marine Operations Across Egypt"
+        description="Contact Max Marine Group for ship agency, Suez transit, crew changes and offshore support. Offices in Alexandria, Port Said, Damietta, Suez and Cairo with 24/7 operations coverage."
+        path="/contact"
+        schema={[
+          localBusinessSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-32">
         <div className="container-maritime">
