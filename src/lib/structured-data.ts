@@ -127,6 +127,25 @@ export function serviceSchema(service: {
   };
 }
 
+/** Service node scoped to a single port — used by the /ports/:id location pages. */
+export function portServiceSchema(location: {
+  id: string;
+  port: string;
+  displayName: string;
+  metaDescription: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Marine & Ship Agency Services at ${location.displayName}`,
+    description: location.metaDescription,
+    serviceType: "Marine agency and offshore support",
+    url: abs(`/ports/${location.id}`),
+    provider: orgRef,
+    areaServed: { "@type": "City", name: location.port },
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

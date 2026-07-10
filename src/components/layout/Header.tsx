@@ -42,12 +42,16 @@ const navigation = {
   fleet: { name: "Fleet & Assets", href: "/fleet" },
   ports: {
     name: "Locations",
-    href: "/ports-offices-yards",
+    href: "/ports",
     children: [
-      { name: "Alexandria Office", href: "/ports-offices-yards#alexandria", description: "Headquarters" },
-      { name: "Abu Qir Yard", href: "/ports-offices-yards/yard-abu-qir", description: "Full service yard" },
-      { name: "Damietta Yard", href: "/ports-offices-yards/yard-damietta", description: "Operational yard" },
-      { name: "All Locations", href: "/ports-offices-yards", description: "Complete network" },
+      { name: "Alexandria", href: "/ports/alexandria", description: "Ship agency & marine services" },
+      { name: "Port Said", href: "/ports/port-said", description: "Suez Canal transit (north)" },
+      { name: "Suez", href: "/ports/suez", description: "Suez Canal transit (south)" },
+      { name: "Damietta", href: "/ports/damietta", description: "Ship agency & cargo" },
+      { name: "Ain Sokhna", href: "/ports/ain-sokhna", description: "Offshore & Red Sea support" },
+      { name: "Abu Qir", href: "/ports/abu-qir", description: "Logistics base & yard" },
+      { name: "All Ports We Serve", href: "/ports", description: "Full port coverage" },
+      { name: "Offices & Yards", href: "/ports-offices-yards", description: "Our facilities network" },
     ],
   },
   caseStudies: { name: "Case Studies", href: "/case-studies" },
@@ -176,7 +180,7 @@ export function Header() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:text-primary">Locations</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 bg-card">
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-card">
                       {navigation.ports.children.map((item) => (
                         <ListItem key={item.name} title={item.name} href={item.href}>
                           {item.description}

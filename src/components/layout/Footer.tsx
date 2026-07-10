@@ -20,6 +20,15 @@ const services = [
   { name: "All Services", href: "/services" },
 ];
 
+const ports = [
+  { name: "Alexandria", href: "/ports/alexandria" },
+  { name: "Port Said", href: "/ports/port-said" },
+  { name: "Suez", href: "/ports/suez" },
+  { name: "Damietta", href: "/ports/damietta" },
+  { name: "Ain Sokhna", href: "/ports/ain-sokhna" },
+  { name: "All Ports We Serve", href: "/ports" },
+];
+
 const quickLinks = [
   { name: "About the Group", href: "/group" },
   { name: "Fleet & Assets", href: "/fleet" },
@@ -61,7 +70,7 @@ export function Footer() {
 
       {/* Main Footer */}
       <div className="container-maritime section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
@@ -116,6 +125,20 @@ export function Footer() {
             <h4 className="font-display text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               {services.map((item) => (
+                <li key={item.name}>
+                  <Link to={item.href} className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Ports We Serve */}
+          <div>
+            <h4 className="font-display text-lg font-semibold mb-4">Ports We Serve</h4>
+            <ul className="space-y-2">
+              {ports.map((item) => (
                 <li key={item.name}>
                   <Link to={item.href} className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
                     {item.name}

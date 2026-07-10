@@ -68,6 +68,15 @@ export const routes: RouteRecord[] = [
         // Only these two ids resolve to a yard detail page (offices are not detail routes).
         getStaticPaths: () => ["ports-offices-yards/yard-abu-qir", "ports-offices-yards/yard-damietta"],
       },
+      { path: "ports", lazy: () => import("./pages/LocationsPage").then((m) => ({ Component: m.default })) },
+      {
+        path: "ports/:portId",
+        lazy: () => import("./pages/LocationsPage").then((m) => ({ Component: m.default })),
+        getStaticPaths: async () => {
+          const { locations } = await import("./data/locations");
+          return locations.map((l) => `ports/${l.id}`);
+        },
+      },
       { path: "case-studies", lazy: () => import("./pages/CaseStudiesPage").then((m) => ({ Component: m.default })) },
       {
         path: "case-studies/:caseStudyId",
