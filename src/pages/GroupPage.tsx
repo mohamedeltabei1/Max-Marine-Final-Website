@@ -79,18 +79,15 @@ const GroupPage = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Max Marine Group traces its roots to 1972, when founder Ibrahim Abdul-Elaziz
-                  began supplying provisions and support to petroleum service vessels from a small
-                  base near Abu Qir. Under the next generation of family leadership, that focused
-                  operation grew into a comprehensive group of five specialized companies serving
-                  the maritime, offshore, and energy sectors.
+                  Max Marine Group was established in 1972 in Alexandria, Egypt. What began as a
+                  focused shipping agency has grown into a comprehensive group of five specialized
+                  companies serving the maritime, offshore, and energy sectors.
                 </p>
                 <p>
-                  Today, the Group operates from strategic locations across Egypt—including
+                  Today, the Group operates from six strategic locations across Egypt, including
                   Alexandria, Abu Qir, Cairo, Port Said, Damietta, and our Free Zone facilities
-                  in El-Amreya—covering every major Egyptian port and airport. This network
-                  ensures rapid response and comprehensive coverage for all port call and
-                  logistics requirements.
+                  in El-Amreya. This network ensures rapid response and comprehensive coverage
+                  for all port call and logistics requirements.
                 </p>
                 <p>
                   Our integrated structure allows us to provide end-to-end solutions—from vessel 
