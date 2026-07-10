@@ -1,10 +1,8 @@
-import { createRoot } from "react-dom/client";
-import { HelmetProvider } from "react-helmet-async";
-import App from "./App.tsx";
+import { ViteReactSSG } from "vite-react-ssg";
+import { routes } from "./App";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>,
-);
+// vite-react-ssg controls mounting/hydration and prerenders every route to
+// static HTML at build time. The entry exports `createRoot`; it does not call
+// createRoot() itself.
+export const createRoot = ViteReactSSG({ routes });

@@ -8,10 +8,10 @@
 
     <!--
       SEO: per-page <title>, description, canonical, Open Graph, Twitter and
-      JSON-LD structured data are all managed at runtime by the <Seo> component
-      (react-helmet-async). Do NOT add description / canonical / og: / twitter:
-      tags here — a static copy would duplicate the per-page tags and crawlers
-      would read the stale value first. Only global, unmanaged tags belong here.
+      JSON-LD structured data are managed by the <Seo> component and prerendered
+      into each route's static HTML at build time (vite-react-ssg + <Head>).
+      Do NOT add description / canonical / og: / twitter: tags here — a static
+      copy would duplicate the per-page tags. Only global, unmanaged tags belong.
     -->
   </head>
 

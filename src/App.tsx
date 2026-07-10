@@ -1,28 +1,11 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
+import type { RouteRecord } from "vite-react-ssg";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
-import Index from "./pages/Index";
-
-// The homepage is eager-loaded for the fastest possible LCP on the primary
-// landing/ranking page. Every other route is code-split so it is only fetched
-// when visited, keeping the initial JavaScript bundle small (better Core Web
-// Vitals, which is a Google ranking signal).
-const GroupPage = lazy(() => import("./pages/GroupPage"));
-const CompaniesPage = lazy(() => import("./pages/CompaniesPage"));
-const ServicesPage = lazy(() => import("./pages/ServicesPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
-const QHSEPage = lazy(() => import("./pages/QHSEPage"));
-const FleetPage = lazy(() => import("./pages/FleetPage"));
-const PortsOfficesYardsPage = lazy(() => import("./pages/PortsOfficesYardsPage"));
-const CaseStudiesPage = lazy(() => import("./pages/CaseStudiesPage"));
-const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
-const TermsPage = lazy(() => import("./pages/TermsPage"));
-const CookiePolicyPage = lazy(() => import("./pages/CookiePolicyPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -32,38 +15,76 @@ const PageFallback = () => (
   </div>
 );
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+// App-wide providers. Rendered once as the root route; every page renders
+// through its <Outlet />.
+function RootLayout() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
         <ScrollToTop />
         <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/group" element={<GroupPage />} />
-            <Route path="/companies" element={<CompaniesPage />} />
-            <Route path="/companies/:companyId" element={<CompaniesPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:serviceId" element={<ServicesPage />} />
-            <Route path="/fleet" element={<FleetPage />} />
-            <Route path="/ports-offices-yards" element={<PortsOfficesYardsPage />} />
-            <Route path="/ports-offices-yards/:yardId" element={<PortsOfficesYardsPage />} />
-            <Route path="/case-studies" element={<CaseStudiesPage />} />
-            <Route path="/case-studies/:caseStudyId" element={<CaseStudiesPage />} />
-            <Route path="/qhse-compliance" element={<QHSEPage />} />
-            <Route path="/careers" element={<ContactPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/privacy" element={<PrivacyPolicyPage />} />
-            <Route path="/cookies" element={<CookiePolicyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Outlet />
         </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
 
-export default App;
+// Each route lazy-imports its page (kept as its own chunk for smaller initial
+// JS). The import() literal is inline so vite-react-ssg can statically detect
+// each route's CSS/asset dependencies and avoid a flash of unstyled content.
+export const routes: RouteRecord[] = [
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, lazy: () => import("./pages/Index").then((m) => ({ Component: m.default })) },
+      { path: "group", lazy: () => import("./pages/GroupPage").then((m) => ({ Component: m.default })) },
+      { path: "companies", lazy: () => import("./pages/CompaniesPage").then((m) => ({ Component: m.default })) },
+      {
+        path: "companies/:companyId",
+        lazy: () => import("./pages/CompaniesPage").then((m) => ({ Component: m.default })),
+        getStaticPaths: async () => {
+          const { companies } = await import("./data/companies");
+          return companies.map((c) => `companies/${c.id}`);
+        },
+      },
+      { path: "services", lazy: () => import("./pages/ServicesPage").then((m) => ({ Component: m.default })) },
+      {
+        path: "services/:serviceId",
+        lazy: () => import("./pages/ServicesPage").then((m) => ({ Component: m.default })),
+        getStaticPaths: async () => {
+          const { services } = await import("./data/services");
+          return services.map((s) => `services/${s.id}`);
+        },
+      },
+      { path: "fleet", lazy: () => import("./pages/FleetPage").then((m) => ({ Component: m.default })) },
+      { path: "ports-offices-yards", lazy: () => import("./pages/PortsOfficesYardsPage").then((m) => ({ Component: m.default })) },
+      {
+        path: "ports-offices-yards/:yardId",
+        lazy: () => import("./pages/PortsOfficesYardsPage").then((m) => ({ Component: m.default })),
+        // Only these two ids resolve to a yard detail page (offices are not detail routes).
+        getStaticPaths: () => ["ports-offices-yards/yard-abu-qir", "ports-offices-yards/yard-damietta"],
+      },
+      { path: "case-studies", lazy: () => import("./pages/CaseStudiesPage").then((m) => ({ Component: m.default })) },
+      {
+        path: "case-studies/:caseStudyId",
+        lazy: () => import("./pages/CaseStudiesPage").then((m) => ({ Component: m.default })),
+        getStaticPaths: () => [
+          "case-studies/offshore-drilling-support",
+          "case-studies/crew-rotation-project",
+          "case-studies/project-cargo-import",
+        ],
+      },
+      { path: "qhse-compliance", lazy: () => import("./pages/QHSEPage").then((m) => ({ Component: m.default })) },
+      { path: "careers", lazy: () => import("./pages/ContactPage").then((m) => ({ Component: m.default })) },
+      { path: "contact", lazy: () => import("./pages/ContactPage").then((m) => ({ Component: m.default })) },
+      { path: "privacy", lazy: () => import("./pages/PrivacyPolicyPage").then((m) => ({ Component: m.default })) },
+      { path: "cookies", lazy: () => import("./pages/CookiePolicyPage").then((m) => ({ Component: m.default })) },
+      { path: "terms", lazy: () => import("./pages/TermsPage").then((m) => ({ Component: m.default })) },
+      { path: "*", lazy: () => import("./pages/NotFound").then((m) => ({ Component: m.default })) },
+    ],
+  },
+];

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import {
   SITE_NAME,
   DEFAULT_TITLE,
@@ -55,7 +55,7 @@ export function Seo({
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
   return (
-    <Helmet>
+    <Head>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
@@ -84,6 +84,6 @@ export function Seo({
           {JSON.stringify(s)}
         </script>
       ))}
-    </Helmet>
+    </Head>
   );
 }
